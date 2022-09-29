@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #arrow{
+            text-align: center;
+            z-index: 1;
+            font-size: 30px;
+        }
+        #circle{
+            border: 1px solid black;
+            border-radius: 50%;
+            position: relative;
+        }
+        #row{
+            position: absolute;
+            border-bottom: 1px solid black;
+            z-index: 1;
+        }
+        #vertical{
+            position: absolute;;
+            border-right: 1px solid black;
+            z-index: 1;
+        }
+        #r1{
+            position: absolute;
+        }
+        #r2{
+            position: absolute;
+        }
+        #r3{
+            position: absolute;
+        }
+        #r4{
+            position: absolute;
+        }
+        #r5{
+            position: absolute;
+        }
+        #text-tl{
+            position: absolute;
+            right: 20%;
+            bottom: 20%;
+            font-size: 30px;
+        }
+        #text-tr{
+            position: absolute;
+            left: 20%;
+            bottom: 20%;
+            font-size: 30px;
+        }
+        #text-bl{
+            position: absolute;
+            right: 20%;
+            top: 20%;
+            font-size: 30px;
+        }
+        #text-br{
+            position: absolute;
+            left: 20%;
+            top: 20%;
+            font-size: 30px;
+        }
+        #btn{
+            width: 20%;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="arrow">↓</div>
+    <div id="circle">
+        <div id="row"></div>
+        <div id="vertical"></div>
+        <div id="r1">
+            <div id="text-tl">
+                一楼吃饭
+            </div>
+        </div>
+        <div id="r2">
+            <div id="text-tr">
+                二楼吃饭
+            </div>
+        </div>
+        <div id="r3">
+            <div id="text-bl">
+                三楼吃饭
+            </div>
+        </div>
+        <div id="r4">
+            <div id="text-br">
+                再来一次
+            </div>
+            </div>
+        </div>
+    </div>
+    <button id="btn">转动</button>
+    <script>
+        var winWidth = window.innerWidth;
+        var winHeight = window.innerHeight;
+        var bottom1 = (winHeight - winWidth/2)/2;
+        var circle = document.getElementById("circle");
+        var row = document.getElementById("row");
+        var vertical =document.getElementById("vertical");
+        var r1 = document.getElementById("r1");
+        var r2 = document.getElementById("r2");
+        var r3 = document.getElementById("r3");
+        var r4 = document.getElementById("r4");
+        var r5 = document.getElementById("r5");
+        var btn = document.getElementById("btn");
+        var start = setInterval(function () {turn()},1);
+        var i=0;
+        var turn1=false;
+        circle.style.width=winWidth/2+"px";
+        circle.style.height=winWidth/2+"px";
+        circle.style.top=bottom1+"px";
+        circle.style.left=winWidth/4+"px";
+        row.style.width=winWidth/2+"px";
+        row.style.height=winWidth/4+"px";
+        vertical.style.width=winWidth/4+"px";
+        vertical.style.height=winWidth/2+"px";
+        r1.style.width=winWidth/4+"px";
+        r1.style.height=winWidth/4+"px";
+        r2.style.width=winWidth/4+"px";
+        r2.style.height=winWidth/4+"px";
+        r2.style.left=winWidth/4+"px";
+        r3.style.width=winWidth/4+"px";
+        r3.style.height=winWidth/4+"px";
+        r3.style.top=winWidth/4+"px";
+        r4.style.width=winWidth/4+"px";
+        r4.style.height=winWidth/4+"px";
+        r4.style.top=winWidth/4+"px";
+        r4.style.left=winWidth/4+"px";
+        window.addEventListener("resize",function () {
+            winWidth=window.innerWidth;
+            winHeight = window.innerHeight;
+            console.log(winWidth);
+            circle.style.width=winWidth/2+"px";
+            circle.style.height=winWidth/2+"px";
+            circle.style.top=(winHeight-winWidth/2)/2+"px";
+            circle.style.left=winWidth/4+"px";
+            row.style.width=winWidth/2+"px";
+            row.style.height=winWidth/4+"px";
+            vertical.style.width=winWidth/4+"px";
+            vertical.style.height=winWidth/2+"px";
+            r1.style.width=winWidth/4+"px";
+            r1.style.height=winWidth/4+"px";
+            r2.style.width=winWidth/4+"px";
+            r2.style.height=winWidth/4+"px";
+            r2.style.left=winWidth/4+"px";
+            r3.style.width=winWidth/4+"px";
+            r3.style.height=winWidth/4+"px";
+            r3.style.top=winWidth/4+"px";
+            r4.style.width=winWidth/4+"px";
+            r4.style.height=winWidth/4+"px";
+            r4.style.top=winWidth/4+"px";
+            r4.style.left=winWidth/4+"px";
+        });
+        function turn() {
+            if (turn1===true){
+                if (i<360){
+                    circle.style.transform="rotate("+i+"deg)";
+                    i++;
+                }else {
+                    i=0;
+                    circle.style.transform="rotate("+i+"deg)";
+                    i++;
+                }
+                console.log(i);
+            }
+        }
+        btn.onclick=function () {
+            turn1=true;
+            var time =360+Math.floor(Math.random()*1000+1);
+            window.setTimeout(end,time);
+        }
+
+        function end() {
+          clearInterval(start);
+
+          if (i<=90){
+              alert("一楼吃饭");
+          }else {
+              if (i<=180){
+                  alert(" 二楼吃饭");
+              }else {
+                  if (i<=270){
+                      alert("三楼吃饭");
+                  }else {
+                      alert("再来一次")
+                  }
+              }
+          }
+          turn1=false;
+          var start = setInterval(function () {turn()},1);
+        }
+
+    </script>
+</body>
